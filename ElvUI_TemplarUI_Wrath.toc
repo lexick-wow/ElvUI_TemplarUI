@@ -1,0 +1,11 @@
+## Interface: 30402
+## Author: Lexick
+## Notes: TemplarUI, an Eltruism Edit with mMediaTag textures
+## Version: 0.9.0
+## Title: |cff1784d1ElvUI|r |cffEA4747T|cffCD3D3De|cffA53030m|cffA72D2Dp|cffB43535l|cffA12828a|cff982222r|cffffffffUI
+## RequiredDeps: ElvUI, ElvUI_EltreumUI, ElvUI_mMediaTag
+## X-Curse-Project-ID: 
+
+Media\media.lua
+Init.lua
+Profiles\load_profiles.xml

@@ -1,9 +1,181 @@
 local E, L, V, P, G = unpack(ElvUI)
-local TemplarUI = E:GetModule('Templar UI')
+local mod = E:GetModule('Templar UI')
+local valuecolors = E:ClassColor(E.myclass, true)
 
-function TemplarUI:TemplarUI()
+function mod:TemplarUI()
 	if not E.db.movers then E.db.movers = {} end
 
+	--fix colors afterwards
+function mod:FixClassColors()
+	E.db["chat"]["tabSelectorColor"]["r"] = valuecolors.r
+	E.db["chat"]["tabSelectorColor"]["g"] = valuecolors.g
+	E.db["chat"]["tabSelectorColor"]["b"] = valuecolors.b
+	E.db["general"]["customGlow"]["color"]["r"] = valuecolors.r
+	E.db["general"]["customGlow"]["color"]["g"] = valuecolors.g
+	E.db["general"]["customGlow"]["color"]["b"] = valuecolors.b
+	E.db["chat"]["tabSelectedTextColor"]["r"] = valuecolors.r
+	E.db["chat"]["tabSelectedTextColor"]["g"] = valuecolors.g
+	E.db["chat"]["tabSelectedTextColor"]["b"] = valuecolors.b
+	E.db["general"]["valuecolor"]["r"] = valuecolors.r
+	E.db["general"]["valuecolor"]["g"] = valuecolors.g
+	E.db["general"]["valuecolor"]["b"] = valuecolors.b
+end
+
+--setup eltruism nameplates/settings
+	E.db.ElvUI_EltreumUI.nameplates.nameplatepower.autoadjustposition = true
+	E.db.ElvUI_EltreumUI.nameplates.nameplateOptions.ClassColorGlow = true
+	E.db.ElvUI_EltreumUI.nameplates.nameplateOptions.ClassBorderNameplate = false
+	if not E.db.ElvUI_EltreumUI.unitframes.gradientmode.npenable then
+		E.db.ElvUI_EltreumUI.nameplates.nameplateOptions.nameplatetexture = true
+	end
+	E.db.ElvUI_EltreumUI.nameplates.nameplateOptions.classbarautohide = true
+	E.db.ElvUI_EltreumUI.nameplates.nameplatepower.texture = "ElvUI Norm1"
+	E.db.ElvUI_EltreumUI.nameplates.nameplatepower.modeleffect = true
+	E.db.ElvUI_EltreumUI.nameplates.classification.enable = false
+	E.db.ElvUI_EltreumUI.nameplates.nameplatepower.gradient = true
+
+	--power bar scaling issues
+	E.db.ElvUI_EltreumUI.nameplates.nameplatepower.sizex = 110.5
+
+	--nameplate shadows (requires main shadows)
+	E.db.ElvUI_EltreumUI.skins.shadow.enable = true
+	E.db.ElvUI_EltreumUI.skins.shadow.nameplates = true
+	E.db.ElvUI_EltreumUI.skins.shadow.nppower = true
+	E.db.ElvUI_EltreumUI.skins.shadow.npcastbar = true
+	E.db.ElvUI_EltreumUI.skins.shadow.npportraits = true
+	E.db.ElvUI_EltreumUI.skins.shadow.npauras = true
+
+	E.db.ElvUI_EltreumUI.skins.shadow.raid = false
+	E.db.ElvUI_EltreumUI.skins.shadow.aura = false
+	E.db.ElvUI_EltreumUI.skins.shadow.ufaura = false
+	E.db.ElvUI_EltreumUI.skins.shadow.actionbars = false
+	E.db.ElvUI_EltreumUI.skins.shadow.minimap = false
+	E.db.ElvUI_EltreumUI.skins.shadow.chat = false
+	E.db.ElvUI_EltreumUI.skins.shadow.unitframes = false
+
+	E.db.ElvUI_EltreumUI.nameplates.nameplatepower.a = 1
+	E.db.ElvUI_EltreumUI.nameplates.nameplatelevel = true
+	E.db.ElvUI_EltreumUI.nameplates.friendlynameplatetoggle.friendlynames = false -- turns out blizzard fakes the nameplates and alphas the helthbar, causing huge performance costs
+	E.db.ElvUI_EltreumUI.nameplates.friendlynameplatetoggle.hidefriendly = false -- and this one is the same but with health so make this one off as well
+	E.db.ElvUI_EltreumUI.nameplates.friendlynameplatetoggle.disablefriendly = true --so hide it instead
+	E.db.ElvUI_EltreumUI.nameplates.nptextureversion = "V2"
+	E.db.ElvUI_EltreumUI.nameplates.nameplateOptions.enableHealthHeight = true
+	E.db.ElvUI_EltreumUI.nameplates.nameplateOptions.useelvuinpheight = true
+	E.db.ElvUI_EltreumUI.nameplates.nameplateOptions.targetmodel = true
+	E.db.ElvUI_EltreumUI.nameplates.nameplateOptions.restedoverlap = true
+	E.db.ElvUI_EltreumUI.nameplates.nameplateOptions.npglow = true
+	E.db.ElvUI_EltreumUI.nameplates.auras.enable = true
+	E.db.ElvUI_EltreumUI.unitframes.gradientmode.nporientation = "VERTICAL"
+	E.private.ElvUI_EltreumUI.nameplatepower.enable = true
+	E.private.ElvUI_EltreumUI.nameplatepower.adjust = true
+
+		--private profile
+	E.private.ElvUI_EltreumUI.install_version = GetAddOnMetadata("ElvUI_EltreumUI", "Version") -- this is so eltruism doesn't popup after
+	E.private["ElvUI_EltreumUI"]["doomignored"] = "195182"
+	E.private["ElvUI_EltreumUI"]["isInstalled"]["projectazilroka"] = true
+	E.private["ElvUI_EltreumUI"]["isInstalled"]["sle"] = true
+	E.private["ElvUI_EltreumUI"]["isInstalled"]["windtools"] = true
+	E.private["ElvUI_EltreumUI"]["nameplatepower"]["adjust"] = true
+	E.private["ElvUI_EltreumUI"]["nameplatepower"]["enable"] = true
+	E.private["actionbar"]["hideCooldownBling"] = true
+	E.private["actionbar"]["masque"]["actionbars"] = true
+	E.private["actionbar"]["masque"]["petBar"] = true
+	E.private["actionbar"]["masque"]["stanceBar"] = true
+	E.private["auras"]["masque"]["buffs"] = true
+	E.private["auras"]["masque"]["debuffs"] = true
+	E.private["general"]["chatBubbleFont"] = "OpenSans-Bold"
+	E.private["general"]["chatBubbleFontOutline"] = "OUTLINE"
+	E.private["general"]["chatBubbleFontSize"] = 10
+	E.private["general"]["chatBubbleName"] = true
+	E.private["general"]["chatBubbles"] = "nobackdrop"
+	E.private["general"]["dmgfont"] = "OpenSans-Bold"
+	E.private["general"]["glossTex"] = "Eltreum-Class-PriestV2"
+	E.private["general"]["minimap"]["hideTracking"] = true
+	E.private["general"]["namefont"] = "OpenSans-Bold"
+	E.private["general"]["nameplateFont"] = "OpenSans-Bold"
+	E.private["general"]["nameplateFontSize"] = 10
+	E.private["general"]["nameplateLargeFont"] = "OpenSans-Bold"
+	E.private["general"]["nameplateLargeFontSize"] = 10
+	E.private["general"]["normTex"] = "Eltreum-Class-PriestV2"
+	E.private["general"]["raidUtility"] = false
+	E.private["general"]["replaceCombatText"] = true
+	E.private["general"]["totemTracker"] = false
+	E.private["install_complete"] = 13.38
+	E.private["skins"]["parchmentRemoverEnable"] = true
+	E.private["theme"] = "class"
+	
+	E.global["general"]["UIScale"] = 0.6 --replace with the scale you use
+
+	E.global["datatexts"]["settings"]["Combat"]["TimeFull"] = false
+	E.global["datatexts"]["settings"]["Durability"]["percThreshold"] = 40
+	E.global["datatexts"]["settings"]["Experience"]["textFormat"] = "PERCENT"
+	E.global["datatexts"]["settings"]["Friends"]["hideAFK"] = true
+	E.global["datatexts"]["settings"]["Friends"]["hideApp"] = true
+	E.global["datatexts"]["settings"]["Friends"]["hideBSAp"] = true
+	E.global["datatexts"]["settings"]["Gold"]["goldCoins"] = false
+
+	E.global["general"]["WorldMapCoordinates"]["position"] = "TOPLEFT"
+	E.global["general"]["WorldMapCoordinates"]["yOffset"] = 44
+	E.global["general"]["fadeMapDuration"] = 0.1
+	E.global["general"]["fadeMapWhenMoving"] = false
+	E.global["general"]["mapAlphaWhenMoving"] = 0.5
+	E.global["general"]["smallerWorldMapScale"] = 0.6
+
+	--start the datatexts
+	E.db["datatexts"]["panels"]["LeftChatDataPanel"]["enable"] = false
+	E.db["datatexts"]["panels"]["RightChatDataPanel"]["enable"] = false
+
+	E.DataTexts:BuildPanelFrame('EltruismDataText')
+	E.global["datatexts"]["customPanels"]["EltruismDataText"]["backdrop"] = false
+	E.global["datatexts"]["customPanels"]["EltruismDataText"]["border"] = false
+	E.global["datatexts"]["customPanels"]["EltruismDataText"]["height"] = 23
+	E.global["datatexts"]["customPanels"]["EltruismDataText"]["fonts"]["enable"] = true
+	E.global["datatexts"]["customPanels"]["EltruismDataText"]["fonts"]["font"] = "OpenSans-Bold"
+	E.global["datatexts"]["customPanels"]["EltruismDataText"]["fonts"]["fontSize"] = 13
+	E.global["datatexts"]["customPanels"]["EltruismDataText"]["name"] = "Eltruism"
+	E.global["datatexts"]["customPanels"]["EltruismDataText"]["numPoints"] = 9
+	E.global["datatexts"]["customPanels"]["EltruismDataText"]["width"] = 2523
+	E.db["datatexts"]["panels"]["EltruismDataText"][1] = "System"
+	E.db["datatexts"]["panels"]["EltruismDataText"][2] = "Coords"
+	E.db["datatexts"]["panels"]["EltruismDataText"][3] = "EltruismTeleports"
+	E.db["datatexts"]["panels"]["EltruismDataText"][4] = ""
+	E.db["datatexts"]["panels"]["EltruismDataText"][5] = "Time"
+	E.db["datatexts"]["panels"]["EltruismDataText"][6] = ""
+	E.db["datatexts"]["panels"]["EltruismDataText"][7] = "DualSpecialization"
+	E.db["datatexts"]["panels"]["EltruismDataText"][8] = "Durability"
+	E.db["datatexts"]["panels"]["EltruismDataText"][9] = "Currencies"
+	E.db["datatexts"]["panels"]["EltruismDataText"]["battleground"] = false
+	E.db["datatexts"]["panels"]["EltruismDataText"]["enable"] = true
+	-- E.db["datatexts"]["panels"]["EltruismTime"][1] = ""
+	-- E.db["datatexts"]["panels"]["EltruismTime"]["battleground"] = false
+	-- E.db["datatexts"]["panels"]["EltruismTime"]["enable"] = false
+	E.db["movers"]["DTPanelEltruismDataTextMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,0"
+	E.db["movers"]["EltruismDoomMover"] = "BOTTOM,UIParent,BOTTOM,0,414"
+	E.db["movers"]["MoverEltruismInstanceDifficulty"] = "BOTTOM,UIParent,BOTTOM,0,194"
+	E.db["movers"]["MoverEltruismWishlist"] = "TOP,UIParent,TOP,0,-190"
+	E.db["nameplates"]["filters"]["EltreumDeadNP"]["triggers"]["enable"] = true
+	E.db["nameplates"]["filters"]["EltreumExecute"]["triggers"]["enable"] = true
+	E.db["nameplates"]["filters"]["EltreumHideNP"]["triggers"]["enable"] = true
+	E.db["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["enable"] = true
+	E.db["nameplates"]["filters"]["EltreumLevel"]["triggers"]["enable"] = true
+	E.db["nameplates"]["filters"]["EltreumRare"]["triggers"]["enable"] = true
+	E.db["nameplates"]["filters"]["EltreumRefreshDebuff"]["triggers"]["enable"] = false
+	E.db["nameplates"]["filters"]["EltreumRestedNP"]["triggers"]["enable"] = true
+	E.db["nameplates"]["filters"]["EltreumSpellsteal"]["triggers"]["enable"] = false
+	E.db["nameplates"]["filters"]["EltreumTarget"]["triggers"]["enable"] = true
+	E.db["nameplates"]["filters"]["EltreumTotems"]["triggers"]["enable"] = true
+
+	if not E.Classic then
+		E.global["unitframe"]["AuraBarColors"][2825]["color"]["b"] = 0.33333334326744
+		E.global["unitframe"]["AuraBarColors"][2825]["color"]["g"] = 0.37647062540054
+		E.global["unitframe"]["AuraBarColors"][2825]["color"]["r"] = 0.98039221763611
+	end
+	if E.Retail then
+		E.global["unitframe"]["AuraBarColors"][80353]["color"]["b"] = 0.91372555494308
+		E.global["unitframe"]["AuraBarColors"][80353]["color"]["g"] = 0.98039221763611
+		E.global["unitframe"]["AuraBarColors"][80353]["color"]["r"] = 0.38431376218796
+	end
+	
 	E.db["ElvUI_EltreumUI"]["borders"]["auraborder"] = false
 	E.db["ElvUI_EltreumUI"]["borders"]["auraborderuf"] = false
 	E.db["ElvUI_EltreumUI"]["borders"]["bar1borders"] = false
@@ -319,8 +491,6 @@ function TemplarUI:TemplarUI()
 	E.db["actionbar"]["bar5"]["hotkeyFontOutline"] = "OUTLINE"
 	E.db["actionbar"]["bar5"]["macroFont"] = "OpenSans-Bold"
 	E.db["actionbar"]["bar5"]["macroFontOutline"] = "OUTLINE"
-	E.db["actionbar"]["bar6"]["buttons"] = 6
-	E.db["actionbar"]["bar6"]["buttonsPerRow"] = 6
 	E.db["actionbar"]["bar6"]["countFont"] = "OpenSans-Bold"
 	E.db["actionbar"]["bar6"]["countFontOutline"] = "OUTLINE"
 	E.db["actionbar"]["bar6"]["hotkeyFont"] = "OpenSans-Bold"
@@ -476,27 +646,11 @@ function TemplarUI:TemplarUI()
 	E.db["datatexts"]["font"] = "OpenSans-Bold"
 	E.db["datatexts"]["fontOutline"] = "OUTLINE"
 	E.db["datatexts"]["fontSize"] = 14
-	-- E.db["datatexts"]["panels"]["EltruismDataText"][1] = "System"
-	-- E.db["datatexts"]["panels"]["EltruismDataText"][2] = "Coords"
-	-- E.db["datatexts"]["panels"]["EltruismDataText"][3] = "EltruismTeleports"
-	-- E.db["datatexts"]["panels"]["EltruismDataText"][4] = ""
-	-- E.db["datatexts"]["panels"]["EltruismDataText"][5] = "Time"
-	-- E.db["datatexts"]["panels"]["EltruismDataText"][6] = ""
-	-- E.db["datatexts"]["panels"]["EltruismDataText"][7] = "DualSpecialization"
-	-- E.db["datatexts"]["panels"]["EltruismDataText"][8] = "Durability"
-	-- E.db["datatexts"]["panels"]["EltruismDataText"][9] = "Currencies"
-	-- E.db["datatexts"]["panels"]["EltruismDataText"]["battleground"] = false
-	-- E.db["datatexts"]["panels"]["EltruismDataText"]["enable"] = true
-	-- E.db["datatexts"]["panels"]["EltruismTime"][1] = ""
-	-- E.db["datatexts"]["panels"]["EltruismTime"]["battleground"] = false
-	-- E.db["datatexts"]["panels"]["EltruismTime"]["enable"] = false
 	E.db["datatexts"]["panels"]["LeftChatDataPanel"]["backdrop"] = false
-	E.db["datatexts"]["panels"]["LeftChatDataPanel"]["enable"] = false
 	E.db["datatexts"]["panels"]["LeftChatDataPanel"]["panelTransparency"] = true
 	E.db["datatexts"]["panels"]["MinimapPanel"]["enable"] = false
 	E.db["datatexts"]["panels"]["MinimapPanel"]["panelTransparency"] = true
 	E.db["datatexts"]["panels"]["RightChatDataPanel"]["backdrop"] = false
-	E.db["datatexts"]["panels"]["RightChatDataPanel"]["enable"] = false
 	E.db["datatexts"]["panels"]["RightChatDataPanel"]["panelTransparency"] = true
 	E.db["general"]["addonCompartment"]["font"] = "OpenSans-Bold"
 	E.db["general"]["addonCompartment"]["fontOutline"] = "OUTLINE"
@@ -547,10 +701,8 @@ function TemplarUI:TemplarUI()
 	E.db["movers"]["BelowMinimapContainerMover"] = "BOTTOM,UIParent,BOTTOM,215,529"
 	E.db["movers"]["BossHeaderMover"] = "TOPRIGHT,UIParent,TOPRIGHT,-4,-379"
 	E.db["movers"]["BuffsMover"] = "BOTTOMLEFT,ElvUIParent,BOTTOMLEFT,439,27"
-	E.db["movers"]["DTPanelEltruismDataTextMover"] = "BOTTOM,ElvUIParent,BOTTOM,0,0"
 	E.db["movers"]["DebuffsMover"] = "BOTTOMLEFT,ElvUIParent,BOTTOMLEFT,629,28"
 	E.db["movers"]["DurabilityFrameMover"] = "BOTTOMLEFT,UIParent,BOTTOMLEFT,833,25"
-	E.db["movers"]["EltruismDoomMover"] = "BOTTOM,UIParent,BOTTOM,0,414"
 	E.db["movers"]["ElvAB_1"] = "BOTTOM,ElvUIParent,BOTTOM,-318,64"
 	E.db["movers"]["ElvAB_2"] = "BOTTOM,ElvUIParent,BOTTOM,-318,27"
 	E.db["movers"]["ElvAB_3"] = "BOTTOM,ElvUIParent,BOTTOM,318,65"
@@ -579,8 +731,6 @@ function TemplarUI:TemplarUI()
 	E.db["movers"]["LootFrameMover"] = "TOPLEFT,UIParent,TOPLEFT,819,-216"
 	E.db["movers"]["MicrobarMover"] = "BOTTOM,UIParent,BOTTOM,0,215"
 	E.db["movers"]["MinimapMover"] = "BOTTOM,UIParent,BOTTOM,0,28"
-	E.db["movers"]["MoverEltruismInstanceDifficulty"] = "BOTTOM,UIParent,BOTTOM,0,194"
-	E.db["movers"]["MoverEltruismWishlist"] = "TOP,UIParent,TOP,0,-190"
 	E.db["movers"]["MoverRaidWarningFrame"] = "TOP,UIParent,TOP,0,-268"
 	E.db["movers"]["MoverUIERRORS"] = "TOP,UIParent,TOP,0,-345"
 	E.db["movers"]["ObjectiveFrameMover"] = "TOPRIGHT,UIParent,TOPRIGHT,-41,-19"
@@ -703,19 +853,8 @@ function TemplarUI:TemplarUI()
 	E.db["nameplates"]["colors"]["threat"]["offTankColorGoodTransition"]["g"] = 0.71372549019608
 	E.db["nameplates"]["colors"]["threat"]["offTankColorGoodTransition"]["r"] = 0.49019607843137
 	E.db["nameplates"]["cooldown"]["fonts"]["font"] = "Kimberley"
-	E.db["nameplates"]["cooldown"]["fonts"]["fontOutline"] = "THICKOUTLINE"
+	E.db["nameplates"]["cooldown"]["fonts"]["fontOutline"] = "OUTLINE"
 	E.db["nameplates"]["cooldown"]["override"] = false
-	-- E.db["nameplates"]["filters"]["EltreumDeadNP"]["triggers"]["enable"] = true
-	-- E.db["nameplates"]["filters"]["EltreumExecute"]["triggers"]["enable"] = true
-	-- E.db["nameplates"]["filters"]["EltreumHideNP"]["triggers"]["enable"] = true
-	-- E.db["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["enable"] = true
-	-- E.db["nameplates"]["filters"]["EltreumLevel"]["triggers"]["enable"] = true
-	-- E.db["nameplates"]["filters"]["EltreumRare"]["triggers"]["enable"] = true
-	-- E.db["nameplates"]["filters"]["EltreumRefreshDebuff"]["triggers"]["enable"] = false
-	-- E.db["nameplates"]["filters"]["EltreumRestedNP"]["triggers"]["enable"] = true
-	-- E.db["nameplates"]["filters"]["EltreumSpellsteal"]["triggers"]["enable"] = false
-	-- E.db["nameplates"]["filters"]["EltreumTarget"]["triggers"]["enable"] = true
-	-- E.db["nameplates"]["filters"]["EltreumTotems"]["triggers"]["enable"] = true
 	E.db["nameplates"]["font"] = "OpenSans-Bold"
 	E.db["nameplates"]["highlight"] = false
 	E.db["nameplates"]["lowHealthThreshold"] = 0.2
@@ -771,7 +910,7 @@ function TemplarUI:TemplarUI()
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["eliteIcon"]["size"] = 16
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["eliteIcon"]["xOffset"] = -4
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["health"]["height"] = 14
-	E.db["nameplates"]["units"]["ENEMY_NPC"]["health"]["text"]["font"] = "OpenSans-Bold"
+	E.db["nameplates"]["units"]["ENEMY_NPC"]["health"]["fontOutline"] = "OUTLINE"
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["health"]["text"]["format"] = "[health:percent] "
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["health"]["text"]["parent"] = "Health"
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["health"]["text"]["xOffset"] = 4
@@ -782,6 +921,7 @@ function TemplarUI:TemplarUI()
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["level"]["parent"] = "Health"
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["level"]["xOffset"] = -6
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["level"]["yOffset"] = -13
+	E.db["nameplates"]["units"]["ENEMY_NPC"]["level"]	["fontOutline"] = "OUTLINE"
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["name"]["font"] = "OpenSans-Bold"
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["name"]["fontSize"] = 9
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["name"]["format"] = "[eltruism:classification][name]"
@@ -797,6 +937,7 @@ function TemplarUI:TemplarUI()
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["power"]["hideWhenEmpty"] = true
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["power"]["text"]["enable"] = true
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["power"]["text"]["font"] = "OpenSans-Bold"
+	E.db["nameplates"]["units"]["ENEMY_NPC"]["power"]["fontOutline"] = "OUTLINE"
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["power"]["text"]["fontSize"] = 10
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["power"]["text"]["position"] = "BOTTOMRIGHT"
 	E.db["nameplates"]["units"]["ENEMY_NPC"]["power"]["text"]["yOffset"] = 10
@@ -833,7 +974,7 @@ function TemplarUI:TemplarUI()
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["castbar"]["castTimeFormat"] = "REMAINING"
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["castbar"]["channelTimeFormat"] = "REMAINING"
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["castbar"]["font"] = "Kimberley"
-	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["castbar"]["fontOutline"] = "THICKOUTLINE"
+	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["castbar"]["fontOutline"] = "OUTLINE"
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["castbar"]["fontSize"] = 10
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["castbar"]["height"] = 12
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["castbar"]["iconOffsetX"] = -4
@@ -859,20 +1000,20 @@ function TemplarUI:TemplarUI()
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["debuffs"]["yOffset"] = 20
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["health"]["height"] = 14
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["health"]["text"]["font"] = "Kimberley"
-	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["health"]["text"]["fontOutline"] = "THICKOUTLINE"
+	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["health"]["text"]["fontOutline"] = "OUTLINE"
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["health"]["text"]["fontSize"] = 12
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["health"]["text"]["parent"] = "Health"
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["health"]["text"]["xOffset"] = 4
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["health"]["text"]["yOffset"] = -1
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["level"]["enable"] = false
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["level"]["font"] = "Kimberley"
-	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["level"]["fontOutline"] = "THICKOUTLINE"
+	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["level"]["fontOutline"] = "OUTLINE"
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["level"]["fontSize"] = 10
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["level"]["format"] = ""
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["level"]["xOffset"] = -6
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["level"]["yOffset"] = -13
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["name"]["font"] = "Kimberley"
-	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["name"]["fontOutline"] = "THICKOUTLINE"
+	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["name"]["fontOutline"] = "OUTLINE"
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["name"]["format"] = "[name:eltruism:gradient][eltruismrealm:dash]"
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["name"]["position"] = "CENTER"
 	E.db["nameplates"]["units"]["ENEMY_PLAYER"]["name"]["yOffset"] = 15
@@ -997,7 +1138,7 @@ function TemplarUI:TemplarUI()
 	E.db["nameplates"]["units"]["PLAYER"]["buffs"]["anchorPoint"] = "TOP"
 	E.db["nameplates"]["units"]["PLAYER"]["buffs"]["attachTo"] = "DEBUFFS"
 	E.db["nameplates"]["units"]["PLAYER"]["buffs"]["countFont"] = "Kimberley"
-	E.db["nameplates"]["units"]["PLAYER"]["buffs"]["countFontOutline"] = "THICKOUTLINE"
+	E.db["nameplates"]["units"]["PLAYER"]["buffs"]["countFontOutline"] = "OUTLINE"
 	E.db["nameplates"]["units"]["PLAYER"]["buffs"]["countFontSize"] = 10
 	E.db["nameplates"]["units"]["PLAYER"]["buffs"]["countXOffset"] = 4
 	E.db["nameplates"]["units"]["PLAYER"]["buffs"]["countYOffset"] = -4
@@ -1012,7 +1153,7 @@ function TemplarUI:TemplarUI()
 	E.db["nameplates"]["units"]["PLAYER"]["castbar"]["castTimeFormat"] = "REMAINING"
 	E.db["nameplates"]["units"]["PLAYER"]["castbar"]["channelTimeFormat"] = "REMAINING"
 	E.db["nameplates"]["units"]["PLAYER"]["castbar"]["font"] = "Kimberley"
-	E.db["nameplates"]["units"]["PLAYER"]["castbar"]["fontOutline"] = "THICKOUTLINE"
+	E.db["nameplates"]["units"]["PLAYER"]["castbar"]["fontOutline"] = "OUTLINE"
 	E.db["nameplates"]["units"]["PLAYER"]["castbar"]["fontSize"] = 10
 	E.db["nameplates"]["units"]["PLAYER"]["castbar"]["height"] = 12
 	E.db["nameplates"]["units"]["PLAYER"]["castbar"]["iconOffsetY"] = -1
@@ -1025,7 +1166,7 @@ function TemplarUI:TemplarUI()
 	E.db["nameplates"]["units"]["PLAYER"]["classpower"]["width"] = 150
 	E.db["nameplates"]["units"]["PLAYER"]["classpower"]["yOffset"] = 12
 	E.db["nameplates"]["units"]["PLAYER"]["debuffs"]["countFont"] = "Kimberley"
-	E.db["nameplates"]["units"]["PLAYER"]["debuffs"]["countFontOutline"] = "THICKOUTLINE"
+	E.db["nameplates"]["units"]["PLAYER"]["debuffs"]["countFontOutline"] = "OUTLINE"
 	E.db["nameplates"]["units"]["PLAYER"]["debuffs"]["countFontSize"] = 10
 	E.db["nameplates"]["units"]["PLAYER"]["debuffs"]["countXOffset"] = 4
 	E.db["nameplates"]["units"]["PLAYER"]["debuffs"]["countYOffset"] = -4
@@ -1038,7 +1179,7 @@ function TemplarUI:TemplarUI()
 	E.db["nameplates"]["units"]["PLAYER"]["debuffs"]["yOffset"] = 2
 	E.db["nameplates"]["units"]["PLAYER"]["health"]["height"] = 14
 	E.db["nameplates"]["units"]["PLAYER"]["health"]["text"]["font"] = "Kimberley"
-	E.db["nameplates"]["units"]["PLAYER"]["health"]["text"]["fontOutline"] = "THICKOUTLINE"
+	E.db["nameplates"]["units"]["PLAYER"]["health"]["text"]["fontOutline"] = "OUTLINE"
 	E.db["nameplates"]["units"]["PLAYER"]["health"]["text"]["fontSize"] = 12
 	E.db["nameplates"]["units"]["PLAYER"]["health"]["text"]["format"] = "[eltruism:hpstatusnopc]"
 	E.db["nameplates"]["units"]["PLAYER"]["health"]["text"]["parent"] = "Health"
@@ -1475,215 +1616,5 @@ function TemplarUI:TemplarUI()
 	E.db["unitframe"]["units"]["targettargettarget"]["buffs"]["countFont"] = "OpenSans-Bold"
 	E.db["unitframe"]["units"]["targettargettarget"]["debuffs"]["countFont"] = "OpenSans-Bold"
 
-	E.private["ElvUI_EltreumUI"]["doomignored"] = "195182"
-E.private["ElvUI_EltreumUI"]["isInstalled"]["projectazilroka"] = true
-E.private["ElvUI_EltreumUI"]["isInstalled"]["sle"] = true
-E.private["ElvUI_EltreumUI"]["isInstalled"]["windtools"] = true
-E.private["ElvUI_EltreumUI"]["nameplatepower"]["adjust"] = true
-E.private["ElvUI_EltreumUI"]["nameplatepower"]["enable"] = true
-E.private["actionbar"]["hideCooldownBling"] = true
-E.private["actionbar"]["masque"]["actionbars"] = true
-E.private["actionbar"]["masque"]["petBar"] = true
-E.private["actionbar"]["masque"]["stanceBar"] = true
-E.private["auras"]["masque"]["buffs"] = true
-E.private["auras"]["masque"]["debuffs"] = true
-E.private["general"]["chatBubbleFont"] = "OpenSans-Bold"
-E.private["general"]["chatBubbleFontOutline"] = "OUTLINE"
-E.private["general"]["chatBubbleFontSize"] = 10
-E.private["general"]["chatBubbleName"] = true
-E.private["general"]["chatBubbles"] = "nobackdrop"
-E.private["general"]["dmgfont"] = "OpenSans-Bold"
-E.private["general"]["glossTex"] = "Eltreum-Class-PriestV2"
-E.private["general"]["minimap"]["hideTracking"] = true
-E.private["general"]["namefont"] = "OpenSans-Bold"
-E.private["general"]["nameplateFont"] = "OpenSans-Bold"
-E.private["general"]["nameplateFontSize"] = 10
-E.private["general"]["nameplateLargeFont"] = "OpenSans-Bold"
-E.private["general"]["nameplateLargeFontSize"] = 10
-E.private["general"]["normTex"] = "Eltreum-Class-PriestV2"
-E.private["general"]["raidUtility"] = false
-E.private["general"]["replaceCombatText"] = true
-E.private["general"]["totemTracker"] = false
-E.private["install_complete"] = 13.38
-E.private["skins"]["parchmentRemoverEnable"] = true
-E.private["theme"] = "class"
-
-E.global["datatexts"]["customPanels"]["EltruismDataText"]["backdrop"] = false
-E.global["datatexts"]["customPanels"]["EltruismDataText"]["border"] = false
-E.global["datatexts"]["customPanels"]["EltruismDataText"]["height"] = 23
-E.global["datatexts"]["customPanels"]["EltruismDataText"]["name"] = "Eltruism"
-E.global["datatexts"]["customPanels"]["EltruismDataText"]["numPoints"] = 9
-E.global["datatexts"]["customPanels"]["EltruismDataText"]["width"] = 2523
-E.global["datatexts"]["customPanels"]["EltruismTime"]["backdrop"] = false
-E.global["datatexts"]["customPanels"]["EltruismTime"]["border"] = false
-E.global["datatexts"]["customPanels"]["EltruismTime"]["fonts"]["enable"] = true
-E.global["datatexts"]["customPanels"]["EltruismTime"]["fonts"]["font"] = "Kimberley"
-E.global["datatexts"]["customPanels"]["EltruismTime"]["fonts"]["fontSize"] = 18
-E.global["datatexts"]["customPanels"]["EltruismTime"]["frameLevel"] = 2
-E.global["datatexts"]["customPanels"]["EltruismTime"]["name"] = "Eltruism"
-E.global["datatexts"]["customPanels"]["EltruismTime"]["numPoints"] = 1
-E.global["datatexts"]["customPanels"]["EltruismTime"]["width"] = 120
-E.global["datatexts"]["settings"]["Combat"]["TimeFull"] = false
-E.global["datatexts"]["settings"]["Durability"]["percThreshold"] = 40
-E.global["datatexts"]["settings"]["Experience"]["textFormat"] = "PERCENT"
-E.global["datatexts"]["settings"]["Friends"]["hideAFK"] = true
-E.global["datatexts"]["settings"]["Friends"]["hideApp"] = true
-E.global["datatexts"]["settings"]["Friends"]["hideBSAp"] = true
-E.global["datatexts"]["settings"]["Gold"]["goldCoins"] = false
-E.global["general"]["WorldMapCoordinates"]["position"] = "TOPLEFT"
-E.global["general"]["WorldMapCoordinates"]["yOffset"] = 44
-E.global["general"]["fadeMapDuration"] = 0.1
-E.global["general"]["fadeMapWhenMoving"] = false
-E.global["general"]["mapAlphaWhenMoving"] = 0.5
-E.global["general"]["smallerWorldMapScale"] = 0.5
-E.global["unitframe"]["AuraBarColors"][2825]["color"]["b"] = 0.33333334326744
-E.global["unitframe"]["AuraBarColors"][2825]["color"]["g"] = 0.37647062540054
-E.global["unitframe"]["AuraBarColors"][2825]["color"]["r"] = 0.98039221763611
-
-E.global["unitframe"]["aurafilters"]["Blacklist"]["spells"][49938]["enable"] = true
-E.global["unitframe"]["aurafilters"]["Blacklist"]["spells"][49938]["priority"] = 0
-E.global["unitframe"]["aurafilters"]["Blacklist"]["spells"][49938]["stackThreshold"] = 0
-E.global["unitframe"]["aurafilters"]["Blacklist"]["spells"][50536]["enable"] = true
-E.global["unitframe"]["aurafilters"]["Blacklist"]["spells"][50536]["priority"] = 0
-E.global["unitframe"]["aurafilters"]["Blacklist"]["spells"][50536]["stackThreshold"] = 0
-E.global["unitframe"]["aurafilters"]["Blacklist"]["spells"][51735]["enable"] = true
-E.global["unitframe"]["aurafilters"]["Blacklist"]["spells"][51735]["priority"] = 0
-E.global["unitframe"]["aurafilters"]["Blacklist"]["spells"][51735]["stackThreshold"] = 0
-
-E.global["nameplates"]["filters"]["EltreumDeadNP"]["actions"]["nameOnly"] = true
-E.global["nameplates"]["filters"]["EltreumDeadNP"]["actions"]["tags"]["name"] = "[name]"
-E.global["nameplates"]["filters"]["EltreumDeadNP"]["triggers"]["isDeadOrGhost"] = true
-E.global["nameplates"]["filters"]["EltreumExecute"]["actions"]["color"]["borderColor"]["b"] = 0
-E.global["nameplates"]["filters"]["EltreumExecute"]["actions"]["color"]["borderColor"]["g"] = 0
-E.global["nameplates"]["filters"]["EltreumExecute"]["actions"]["color"]["health"] = true
-E.global["nameplates"]["filters"]["EltreumExecute"]["actions"]["color"]["healthColor"]["g"] = 0
-E.global["nameplates"]["filters"]["EltreumExecute"]["actions"]["color"]["healthColor"]["r"] = 0.65
-E.global["nameplates"]["filters"]["EltreumExecute"]["actions"]["flash"]["color"]["b"] = 0
-E.global["nameplates"]["filters"]["EltreumExecute"]["actions"]["flash"]["color"]["g"] = 0
-E.global["nameplates"]["filters"]["EltreumExecute"]["actions"]["flash"]["color"]["r"] = 0
-E.global["nameplates"]["filters"]["EltreumExecute"]["actions"]["flash"]["speed"] = 7
-E.global["nameplates"]["filters"]["EltreumExecute"]["actions"]["scale"] = 1.25
-E.global["nameplates"]["filters"]["EltreumExecute"]["actions"]["texture"]["enable"] = true
-E.global["nameplates"]["filters"]["EltreumExecute"]["actions"]["texture"]["texture"] = "ElvUI Norm1"
-E.global["nameplates"]["filters"]["EltreumExecute"]["triggers"]["healthThreshold"] = true
-E.global["nameplates"]["filters"]["EltreumExecute"]["triggers"]["isNotTapDenied"] = true
-E.global["nameplates"]["filters"]["EltreumExecute"]["triggers"]["playerCanAttack"] = true
-E.global["nameplates"]["filters"]["EltreumExecute"]["triggers"]["underHealthThreshold"] = 0.1
-E.global["nameplates"]["filters"]["EltreumHideNP"]["actions"]["nameOnly"] = true
-E.global["nameplates"]["filters"]["EltreumHideNP"]["actions"]["tags"]["name"] = "[name:eltruism:gradient]"
-E.global["nameplates"]["filters"]["EltreumHideNP"]["actions"]["tags"]["title"] = "[eltruismnpctitle:brackets]"
-E.global["nameplates"]["filters"]["EltreumHideNP"]["triggers"]["nameplateType"]["enable"] = true
-E.global["nameplates"]["filters"]["EltreumHideNP"]["triggers"]["nameplateType"]["enemyNPC"] = true
-E.global["nameplates"]["filters"]["EltreumHideNP"]["triggers"]["playerCanNotAttack"] = true
-E.global["nameplates"]["filters"]["EltreumHideNP"]["triggers"]["priority"] = 15
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["alpha"] = 100
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["color"]["borderColor"]["a"] = 0.7
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["color"]["borderColor"]["g"] = 0
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["color"]["healthColor"]["g"] = 0
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["flash"]["color"]["b"] = 0
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["flash"]["color"]["g"] = 0
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["flash"]["color"]["r"] = 0
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["flash"]["speed"] = 7
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["glow"]["color"][1] = 1
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["glow"]["color"][2] = 0
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["glow"]["color"][3] = 0.078431375324726
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["glow"]["color"][4] = 0.90000000596046
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["glow"]["enable"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["glow"]["size"] = 2
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["glow"]["speed"] = 0.75
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["scale"] = 1.2
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["texture"]["enable"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["actions"]["texture"]["texture"] = "Eltreum-Stripes"
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["casting"]["interruptible"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["inCombat"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["instanceDifficulty"]["dungeon"]["heroic"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["instanceDifficulty"]["dungeon"]["mythic"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["instanceDifficulty"]["dungeon"]["mythic+"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["instanceDifficulty"]["dungeon"]["normal"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["instanceDifficulty"]["dungeon"]["timewalking"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["instanceType"]["arena"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["instanceType"]["none"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["instanceType"]["party"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["instanceType"]["pvp"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["instanceType"]["scenario"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["isNotTapDenied"] = true
-E.global["nameplates"]["filters"]["EltreumInterrupt"]["triggers"]["notTarget"] = true
-E.global["nameplates"]["filters"]["EltreumLevel"]["actions"]["tags"]["level"] = "[difficultycolor][smartlevel]"
-E.global["nameplates"]["filters"]["EltreumLevel"]["triggers"]["isTarget"] = true
-E.global["nameplates"]["filters"]["EltreumLevel"]["triggers"]["mylevel"] = false
-E.global["nameplates"]["filters"]["EltreumLevel"]["triggers"]["notTarget"] = true
-E.global["nameplates"]["filters"]["EltreumLevel"]["triggers"]["notTargetMe"] = false
-E.global["nameplates"]["filters"]["EltreumLevel"]["triggers"]["playerCanAttack"] = true
-E.global["nameplates"]["filters"]["EltreumRare"]["actions"]["color"]["health"] = true
-E.global["nameplates"]["filters"]["EltreumRare"]["actions"]["scale"] = 1.25
-E.global["nameplates"]["filters"]["EltreumRare"]["actions"]["texture"]["enable"] = true
-E.global["nameplates"]["filters"]["EltreumRare"]["actions"]["texture"]["texture"] = "Eltreum-Class-Shaman"
-E.global["nameplates"]["filters"]["EltreumRare"]["triggers"]["classification"]["rare"] = true
-E.global["nameplates"]["filters"]["EltreumRare"]["triggers"]["classification"]["rareelite"] = true
-E.global["nameplates"]["filters"]["EltreumRare"]["triggers"]["isNotTapDenied"] = true
-E.global["nameplates"]["filters"]["EltreumRare"]["triggers"]["priority"] = 10
-E.global["nameplates"]["filters"]["EltreumRefreshDebuff"]["actions"]["alpha"] = 100
-E.global["nameplates"]["filters"]["EltreumRefreshDebuff"]["actions"]["scale"] = 1.25
-E.global["nameplates"]["filters"]["EltreumRefreshDebuff"]["triggers"]["debuffs"]["fromMe"] = true
-E.global["nameplates"]["filters"]["EltreumRefreshDebuff"]["triggers"]["debuffs"]["maxTimeLeft"] = 5
-E.global["nameplates"]["filters"]["EltreumRefreshDebuff"]["triggers"]["enable"] = false
-E.global["nameplates"]["filters"]["EltreumRefreshDebuff"]["triggers"]["inCombat"] = true
-E.global["nameplates"]["filters"]["EltreumRefreshDebuff"]["triggers"]["notTarget"] = true
-E.global["nameplates"]["filters"]["EltreumRestedNP"]["actions"]["alpha"] = 100
-E.global["nameplates"]["filters"]["EltreumRestedNP"]["actions"]["nameOnly"] = true
-E.global["nameplates"]["filters"]["EltreumRestedNP"]["actions"]["tags"]["name"] = "[eltruismname:title][eltruismrealm:dash]"
-E.global["nameplates"]["filters"]["EltreumRestedNP"]["actions"]["tags"]["title"] = "[eltruismnpctitle:brackets][eltruismguild:brackets]"
-E.global["nameplates"]["filters"]["EltreumRestedNP"]["triggers"]["isResting"] = true
-E.global["nameplates"]["filters"]["EltreumRestedNP"]["triggers"]["outOfCombat"] = true
-E.global["nameplates"]["filters"]["EltreumRestedNP"]["triggers"]["playerCanNotAttack"] = true
-E.global["nameplates"]["filters"]["EltreumSpellsteal"]["actions"]["alpha"] = 100
-E.global["nameplates"]["filters"]["EltreumSpellsteal"]["actions"]["flash"]["enable"] = true
-E.global["nameplates"]["filters"]["EltreumSpellsteal"]["actions"]["scale"] = 1.25
-E.global["nameplates"]["filters"]["EltreumSpellsteal"]["triggers"]["buffs"]["hasStealable"] = true
-E.global["nameplates"]["filters"]["EltreumSpellsteal"]["triggers"]["class"]["MAGE"]["enabled"] = true
-E.global["nameplates"]["filters"]["EltreumSpellsteal"]["triggers"]["isTarget"] = true
-E.global["nameplates"]["filters"]["EltreumSpellsteal"]["triggers"]["notTarget"] = true
-E.global["nameplates"]["filters"]["EltreumSpellsteal"]["triggers"]["priority"] = 13
-E.global["nameplates"]["filters"]["EltreumTarget"]["actions"]["color"]["borderColor"]["b"] = 0
-E.global["nameplates"]["filters"]["EltreumTarget"]["actions"]["color"]["borderColor"]["g"] = 0
-E.global["nameplates"]["filters"]["EltreumTarget"]["actions"]["color"]["borderColor"]["r"] = 0
-E.global["nameplates"]["filters"]["EltreumTarget"]["actions"]["scale"] = 1.25
-E.global["nameplates"]["filters"]["EltreumTarget"]["triggers"]["classification"]["elite"] = true
-E.global["nameplates"]["filters"]["EltreumTarget"]["triggers"]["classification"]["minus"] = true
-E.global["nameplates"]["filters"]["EltreumTarget"]["triggers"]["classification"]["normal"] = true
-E.global["nameplates"]["filters"]["EltreumTarget"]["triggers"]["classification"]["trivial"] = true
-E.global["nameplates"]["filters"]["EltreumTarget"]["triggers"]["classification"]["worldboss"] = true
-E.global["nameplates"]["filters"]["EltreumTarget"]["triggers"]["isTarget"] = true
-E.global["nameplates"]["filters"]["EltreumTarget"]["triggers"]["priority"] = 2
-E.global["nameplates"]["filters"]["EltreumTotems"]["actions"]["scale"] = 1.25
-E.global["nameplates"]["filters"]["EltreumTotems"]["actions"]["usePortrait"] = true
-E.global["nameplates"]["filters"]["EltreumTotems"]["triggers"]["creatureType"]["Totem"] = true
-E.global["nameplates"]["filters"]["EltreumTotems"]["triggers"]["creatureType"]["enable"] = true
-E.global["nameplates"]["filters"]["EltreumTotems"]["triggers"]["isTarget"] = true
-E.global["nameplates"]["filters"]["EltreumTotems"]["triggers"]["notTarget"] = true
-E.global["nameplates"]["filters"]["EltreumTotems"]["triggers"]["playerCanAttack"] = true
-E.global["nameplates"]["filters"]["EltreumTotems"]["triggers"]["priority"] = 14
-E.global["nameplates"]["filters"]["ElvUI_Boss"]["actions"]["color"]["borderColor"]["b"] = 0.87
-E.global["nameplates"]["filters"]["ElvUI_Boss"]["actions"]["color"]["borderColor"]["g"] = 0.44
-E.global["nameplates"]["filters"]["ElvUI_Boss"]["actions"]["color"]["borderColor"]["r"] = 0
-E.global["nameplates"]["filters"]["ElvUI_NonTarget"]["actions"]["alpha"] = 100
-E.global["nameplates"]["filters"]["ElvUI_NonTarget"]["actions"]["color"]["borderColor"]["b"] = 0.22745099663734
-E.global["nameplates"]["filters"]["ElvUI_NonTarget"]["actions"]["color"]["borderColor"]["g"] = 0.11764706671238
-E.global["nameplates"]["filters"]["ElvUI_NonTarget"]["actions"]["color"]["borderColor"]["r"] = 0.76862752437592
-E.global["nameplates"]["filters"]["ElvUI_NonTarget"]["actions"]["scale"] = 0.75
-E.global["nameplates"]["filters"]["ElvUI_NonTarget"]["triggers"]["instanceDifficulty"]["dungeon"]["heroic"] = true
-E.global["nameplates"]["filters"]["ElvUI_NonTarget"]["triggers"]["requireTarget"] = false
-E.global["nameplates"]["filters"]["ElvUI_NonTarget"]["triggers"]["underPowerThreshold"] = 0.9
-E.global["nameplates"]["filters"]["ElvUI_Target"]["actions"]["alpha"] = 100
-E.global["nameplates"]["filters"]["ElvUI_Target"]["actions"]["color"]["borderColor"]["b"] = 0
-E.global["nameplates"]["filters"]["ElvUI_Target"]["actions"]["color"]["borderColor"]["g"] = 0
-E.global["nameplates"]["filters"]["ElvUI_Target"]["actions"]["color"]["borderColor"]["r"] = 0
-E.global["nameplates"]["filters"]["ElvUI_Target"]["actions"]["scale"] = 1.25
-E.global["nameplates"]["filters"]["ElvUI_Target"]["actions"]["texture"]["texture"] = "Eltreum-Class-HunterV3"
-
-
-
-
-	
 
 end

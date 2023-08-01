@@ -26,25 +26,19 @@ local function SetupLayout(layout)
 
 	--import eltruism nameplates
 	if E.private.nameplates.enable then
-		-- mod:EltruismNPSettings()
+		ElvUI_EltreumUI:SetupNamePlates('ElvUI')
 	end
 
 	--import gradient mode
 	ElvUI_EltreumUI:GradientMode()
 	
-	--set Eltruism defaults (some of which will be disabled on profiles)
-	--ElvUI_EltreumUI:UpdateEltruismSettings()
-
-	--setup general settings
-	-- mod:General()
-
 	--profile specific settings (layouts)
 	if layout == "TemplarUI" then
 		mod:TemplarUI()
 	end
 
 	--fix the colors after the profile
-	-- mod:FixClassColors()
+	mod:FixClassColors()
 
 	--Update ElvUI
 	E:StaggeredUpdateAll()

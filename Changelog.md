@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.9.2] - 2023-07-31
+
+### Changed
+
+- Redid the UI scaling of almost everything so it's pixel perfect
+- Minor changes to the namesplates etc.
+- Removed chat toggles for testing
+
 ## [0.9.1] - 2023-07-31
 
 ### Fixed
